@@ -4,17 +4,13 @@ const expect = require('chai').expect
 const bunyanSqlStream = require('../')
 const knex = require('knex')
 const bunyan = require('bunyan')
+const config = require('./config')
 
 describe('bunyan-sql-stream', () => {
   it('should initialize', () => {
     expect(bunyanSqlStream({
       client: 'pg',
-      connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: 'password',
-        database: 'db'
-      },
+      connection: config.connection,
       tableName: 'logs'
     })).to.not.be.null
   })
@@ -22,12 +18,7 @@ describe('bunyan-sql-stream', () => {
   it('should not initialize without a table name', () => {
     expect(() => bunyanSqlStream({
       client: 'pg',
-      connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: 'password',
-        database: 'db'
-      }
+      connection: config.connection,
     })).to.throw()
   })
 
@@ -41,12 +32,7 @@ describe('bunyan-sql-stream', () => {
   it('should accept a Knex.js instance', () => {
     const db = knex({
       client: 'pg',
-      connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: 'password',
-        database: 'db'
-      }
+      connection: config.connection,
     })
     expect(bunyanSqlStream({
       connection: db,
@@ -57,12 +43,7 @@ describe('bunyan-sql-stream', () => {
   it('should write to a PostgreSQL database', (done) => {
     const db = knex({
       client: 'pg',
-      connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: 'password',
-        database: 'db'
-      }
+      connection: config.connection,
     })
 
     const stream = bunyanSqlStream({
