@@ -12,7 +12,6 @@ class LogStream extends Writable {
 
     if (options.connection.client && options.connection.client.makeKnex) {
       this.db = options.connection
-      this._write = this._writeKnex
     }
 
     if (typeof options.connection === 'object') {
@@ -40,13 +39,6 @@ class LogStream extends Writable {
       })
       .into(this.tableName)
       .asCallback(cb)
-  }
-
-  end (cb) {
-    if (this.pool) {
-      return this.pool.end(cb)
-    }
-    cb()
   }
 }
 
