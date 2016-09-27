@@ -24,6 +24,20 @@ npm install --save bunyan-sql-stream
 
 ## Usage
 
+First, create the table you want to store your logs in:
+```sql
+create table if not exists "public"."logs" (
+  "id" serial primary key,
+  "name" text,
+  "level" integer,
+  "hostname" text,
+  "msg" text,
+  "pid" integer,
+  "time" timestamptz,
+  "content" jsonb
+)
+```
+
 ```js
 const logger = bunyan.createLogger({
 	name: 'sql stream',
@@ -55,7 +69,7 @@ The package should issue an error message that will tell you which module to ins
 
 ## Additional Info
 
-This package depends on knex.js and has more dependencies than some other packages. If want to minimize dependencies, you might prefer another module:
+This package depends on Knex.js. If want to minimize dependencies, you might prefer another module:
 - PostgreSQL - [bunyan-postgres-stream](https://github.com/fdesjardins/bunyan-postgres-stream)
 - MSSQL - [bunyan-mssql-stream](https://github.com/Vaelek/bunyan-mssql-stream)
 - MySQL - [bunyan-mysql-stream](https://github.com/ehattori/bunyan-mysql)
