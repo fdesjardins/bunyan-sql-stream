@@ -28,6 +28,3 @@ const log = bunyan.createLogger({
 
 // log an event
 log.info('something happened')
-
-// explicity dispose of the database connection pool
-stream.end()
