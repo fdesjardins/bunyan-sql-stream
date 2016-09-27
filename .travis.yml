@@ -2,6 +2,14 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
-script: 'npm test'
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - NODE_ENV=test ./node_modules/.bin/knex migrate:latest --knexfile ./test/knexfile.js
+script:
+  - 'npm test'
 after_script:
   - 'cat coverage/lcov.info | ./node_modules/.bin/coveralls'
