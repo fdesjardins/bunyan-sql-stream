@@ -42,17 +42,17 @@ Then, use the package as a Bunyan stream:
 
 ```js
 const logger = bunyan.createLogger({
-	name: 'sql stream',
-	level: 'info',
-	stream: bunyanSqlStream({
+  name: 'sql stream',
+  level: 'info',
+  stream: bunyanSqlStream({
     client: 'pg',
-  	connection: {
-  		host: 'localhost',
-  		user: 'postgres',
-  		password: 'password',
-  		database: 'db'
-  	},
-  	tableName: 'logs'
+    connection: {
+      host: 'localhost',
+      user: 'postgres',
+      password: 'password',
+      database: 'db'
+    },
+    tableName: 'logs'
   })
 })
 ```
