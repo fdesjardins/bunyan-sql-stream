@@ -1,6 +1,6 @@
 {
   "name": "bunyan-sql-stream",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stream your Bunyan logs to your favorite SQL database",
   "main": "index.js",
   "repository": "fdesjardins/bunyan-sql-stream",
