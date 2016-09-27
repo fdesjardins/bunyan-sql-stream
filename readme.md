@@ -14,7 +14,7 @@ Currently, it supports:
 - SQLite3
 - Oracle
 
-The stream maps the default Bunyan log fields to table columns and also stores the entire log message. Depending on your database, it will attempt to store the message in a `json` column type.
+The stream maps the default Bunyan log fields to table columns and also stores the entire log message. Depending on your database's capabilities, it will attempt to store the message in a `json`, `jsonb`, or text column type.
 
 ## Installation
 
@@ -38,6 +38,8 @@ create table if not exists "public"."logs" (
 )
 ```
 
+Then, use the package as a Bunyan stream:
+
 ```js
 const logger = bunyan.createLogger({
 	name: 'sql stream',
@@ -56,6 +58,8 @@ const logger = bunyan.createLogger({
 ```
 
 This package uses the same client and connection options as [Knex.js](http://knexjs.org/).
+
+## Database Clients
 
 You'll also need to install a database client for each type of database you'll be logging to.
 
